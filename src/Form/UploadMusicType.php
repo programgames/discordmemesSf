@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 
@@ -15,8 +16,9 @@ class UploadMusicType extends AbstractType
     {
         $builder
             ->add('mp3file', FileType::class, [
-                'label' => 'Fichier mp3',
-                'mapped' => 'false',
+                'label' => 'Uploadez un Fichier mp3',
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -25,6 +27,11 @@ class UploadMusicType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid MP3 file',
                     ])
                 ],
+            ])
+            ->add('mp3url', UrlType::class, [
+                'label' => 'Ou rentrez une url d\'un fichier mp3',
+                'mapped' => 'false',
+                'required' => false
             ])
         ->add('filename', TextType::class, [
             'label' => 'Nom du fichier qui seras utiliser pour le bot : ',
