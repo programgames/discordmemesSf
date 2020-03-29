@@ -30,7 +30,7 @@ class UploadProcessor
             }
         }
         elseif ($url) {
-            $path = $this->getParameter('mp3_directory') .'/'. $name . '.mp3';
+            $path = $mp3Folder .'/'. $name . '.mp3';
             file_put_contents($path, file_get_contents($url));
             return new Response('Fichier bien transmis : ' . $name . '.mp3',200);
         }
