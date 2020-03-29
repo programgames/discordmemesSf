@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Interface d'upload de fichier mp3{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_row(form.mp3file) }}
+    {{ form_row(form.filename) }}
+    {{ form_end(form) }}
+{% endblock %}
