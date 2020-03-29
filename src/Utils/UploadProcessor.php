@@ -31,8 +31,13 @@ class UploadProcessor
         }
         elseif ($url) {
             $path = $mp3Folder .'/'. $name . '.mp3';
-            file_put_contents($path, file_get_contents($url));
-            return new Response('Fichier bien transmis : ' . $name . '.mp3',200);
+            try {
+                file_put_contents($path, file_get_contents($url));
+                return new Response('Fichier bien transmis : ' . $name . '.mp3',200);
+            } catch (\Exception $e)
+            {
+                return new Response('Erreur inconnu lors du transfert du fichier',400);
+            }
         }
     }
 

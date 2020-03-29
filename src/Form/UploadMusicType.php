@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Url;
 
 class UploadMusicType extends AbstractType
 {
@@ -31,8 +33,16 @@ class UploadMusicType extends AbstractType
             ->add('mp3url', UrlType::class, [
                 'label' => 'Ou rentrez une url d\'un fichier mp3',
                 'mapped' => 'false',
-                'required' => false
-            ])
+                'required' => false,
+                'constraints' => [
+                    new Url([
+                        'message' => "Veuillez utiliser une url valide"
+                    ]),
+                    new Regex([
+                        'pattern' => '/^(https?|ftp|file):\/\/(www.)?(.*?)\.(mp3)$/',
+                        'message' => 'Veuillez utiliser un fichier mp3 valide'
+                    ])
+                ]])
         ->add('filename', TextType::class, [
             'label' => 'Nom du fichier qui seras utiliser pour le bot : ',
             'mapped' => 'false',
